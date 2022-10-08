@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick WhatsApp</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+        *, *::before, *::after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #08c18a;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        h1 {
+            font-size: 2.3em;
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+            font-weight: 100;
+        }
+
+        h5 {
+            text-align: center;
+            color: white;
+            font-weight: 100;
+            transform: translate(-52px, 3px);
+        }
+
+        main {
+            width: 100vw;
+            height: calc(80vh);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        main input {
+            font-size: 1.8em;
+            border-radius: 5px;
+            box-shadow: 0 0 4px;
+            border: 0;
+            padding: 5px;
+            font-weight: light;
+            color: rgb(18, 18, 18);
+        }
+
+        main input:focus {
+            border: none;
+            box-shadow: none;
+            outline: none;
+            box-shadow: 0 0 6px;
+        }
+
+        main button {
+            font-size: 1.8em;
+            font-weight: bold;
+            padding: 3px 10px;
+        }
+
+
+        .buttons {
+            margin-top: 5px;
+            width: 100%;
+            display: flex;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quick WhatsApp</h1>
+    <h5>open direct WhatsApp chat</h5>
+    <main>
+        <div class="input">
+            <input type="text" placeholder="Whatsapp Number" />
+            <div class="buttons">
+                <button disabled>Desktop</button>
+                <button disabled>Web</button>
+            </div>
+        </div>
+    </main>
+    <script>
+        const input = document.querySelector('input')
+        const button1 = document.querySelector('.buttons button:nth-child(1)')
+        const button2 = document.querySelector('.buttons button:nth-child(2)')
+
+        input.addEventListener('keyup', e => {
+            const value = input.value
+            button1.disabled = value ? false : true
+            button2.disabled = value ? false : true
+        })
+
+
+
+
+        const btn1clickHandler = () => {
+            let number = input.value
+            if (number.startsWith('0')) {
+                number = number.slice(1)
+            }
+            const url = `whatsapp://send?phone=${number}`
+            open(url)
+        }
+
+
+        const btn2clickHandler = () => {
+            let number = input.value
+            if (number.startsWith('0')) {
+                number = number.slice(1)
+            }
+            const url = `https://api.whatsapp.com/send?phone=${number}`
+            window.open(url, '_blank').focus();
+        }
+
+        const open = (URL) => {
+            const iframe = document.createElement('iframe')
+            iframe.src = URL
+            iframe.width = 0
+            iframe.height = 0
+            iframe.frameBorder = 0
+            document.body.appendChild(iframe)
+            iframe.parentNode.removeChild(iframe)
+        }
+
+        button1.addEventListener('click', btn1clickHandler)
+        button2.addEventListener('click', btn2clickHandler)
+
+        input.focus()
+    </script>
+</body>
+</html>

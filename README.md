@@ -2,4 +2,4 @@
 
 Open WhatsApp number in web / desktop app
 
-(Live)[https://google.com] on github pages
+[Live](https://thewh1teagle.github.io/quick-whatsapp) on github pages
